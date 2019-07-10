@@ -62,12 +62,12 @@
 .front-main-nav li {
     text-align: center;
     margin: 15px auto;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
 }
 
 .front-main-nav li:hover {
     font-weight: bold;
-    line-height: 4rem;
+    /* line-height: 4rem; */
 }
 
 .logo {

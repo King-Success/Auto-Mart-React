@@ -1,8 +1,8 @@
 import React from "react";
-import "./Banner.css";
+import "./Landing.css";
 import bannerImage from "./bannerImage.png";
 
-function Banner() {
+function Landing() {
   return (
     <div id="header" className="banner d-flex flex-col">
       <div className="banner__image">
@@ -28,4 +28,4 @@ function Banner() {
   );
 }
 
-export default Banner;
+export default Landing;
