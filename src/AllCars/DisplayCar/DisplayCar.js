@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./DisplayCar.css";
 
-function DisplayCar(car) {
+function DisplayCar({ data }) {
   return (
     <div className="grid">
       <div className="post">
@@ -11,7 +11,7 @@ function DisplayCar(car) {
         </a>
         <div className="details">
           <a href="login">
-            <h2 className="title">{car.model || "Lorem Ipsum"}</h2>
+            <h2 className="title">{data.model || "Lorem Ipsum"}</h2>
             <em style={{ color: "green" }} />{" "}
           </a>
         </div>
@@ -34,7 +34,7 @@ function DisplayCar(car) {
 }
 
 DisplayCar.propTypes = {
-  car: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired
 };
 
 export default DisplayCar;

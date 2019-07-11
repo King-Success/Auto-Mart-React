@@ -1,7 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./CarDetails.css";
 
-function CarDetails() {
+function CarDetails({ data }) {
   return (
     <div class="grid">
       <div class="grid__image">
@@ -53,5 +54,9 @@ function CarDetails() {
     </div>
   );
 }
+
+CarDetails.propTypes = {
+  data: PropTypes.object.isRequired
+};
 
 export default CarDetails;
