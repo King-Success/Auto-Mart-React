@@ -1,4 +1,5 @@
 import React from "react";
+import CarDetails from "./CarDetails/CarDetails";
 import "./Profile.css";
 
 function Profile() {
@@ -45,7 +46,10 @@ function Profile() {
           </div>
         </div>
         <div class="main" id="cars-grid">
-          <div class="alert smooth" style={{ textAlign: "center" }} />
+          <div class="alert smooth" style={{ textAlign: "center" }}>
+            Loading...
+          </div>
+          <CarDetails />
         </div>
       </div>
     </header>
