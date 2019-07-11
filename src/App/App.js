@@ -4,6 +4,7 @@ import Navigation from "../Nav/Nav";
 import Landing from "../Landing/Landing";
 import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
+import AllCars from "../AllCars/AllCars";
 import "./App.css";
 import "./Util.css";
 
@@ -13,8 +14,9 @@ function App() {
       <div className="home__wrapper">
         <Navigation />
         <Route exact path="/" component={Landing} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/auth/login" component={Login} />
+        <Route path="/auth/signup" component={Signup} />
+        <Route path="/cars/all" component={AllCars} />
       </div>
     </Router>
   );

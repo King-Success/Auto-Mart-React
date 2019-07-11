@@ -64,8 +64,33 @@
     height: 45px;
 }
 
-.all__cars__grid {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+@media screen and (max-width: 768px) {
+    .search__sort {
+        flex-direction: column
+    }
+    .search__sort .search {
+        width: 100%;
+    }
+    .search__sort .state__make {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .search__sort .state__make .state, .search__sort .state__make .make {
+        flex-grow: 1;
+    }
+    .search__sort .price__filter {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .search__sort .price__filter .price .search__sort .price__filter .filter {
+        flex-grow: 1;
+    }
+    .search__sort input[type="text"], .search__sort select, .search__sort button {
+        width: 90%
+    }
+    .search__sort .price, .search__sort .make, .search__sort .state, .search__sort .go {
+        width: 95%;
+    }
 }
