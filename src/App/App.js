@@ -6,6 +6,7 @@ import Login from "../Login/Login";
 import Signup from "../Signup/Signup";
 import AllCars from "../AllCars/AllCars";
 import PostCar from "../PostCar/PostCar";
+import Profile from "../Profile/Profile";
 import "./App.css";
 import "./Util.css";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/auth/signup" component={Signup} />
         <Route path="/cars/all" component={AllCars} />
         <Route path="/cars/new" component={PostCar} />
+        <Route path="/user/profile" component={Profile} />
       </div>
     </Router>
   );
