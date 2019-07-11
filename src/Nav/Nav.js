@@ -13,12 +13,12 @@ function Nav() {
       </a>
       <ul className="front-main-nav" id="main__nav__menu">
         <li>
-          <Link to="/login" className="nav-link">
+          <Link to="/auth/login" className="nav-link">
             Login
           </Link>
         </li>
         <li>
-          <Link to="/signup" className="nav-link">
+          <Link to="/auth/signup" className="nav-link">
             Signup
           </Link>
         </li>

@@ -1,0 +1,119 @@
+#post__ad {
+    padding-top: 80px;
+    height: 790px;
+}
+
+#post__ad .main__wrapper {
+    /* width: 40%; */
+    display: flex;
+    justify-content: center;
+}
+
+#post__ad .card__wrapper {
+    justify-content: center;
+    height: 740px;
+    max-width: 400px;
+}
+
+.update__price {
+    height: 300px !important;
+}
+
+#post__ad .post__ad__left {
+    width: 80%;
+    padding: 30px;
+}
+
+.post__ad__left input[type="text"], .post__ad__right input[type="text"], .post__ad__left select, .post__ad__right select {
+    width: 95%;
+    height: 40px;
+    border: 1px solid #092467;
+    margin-top: 5px;
+    margin-bottom: 13px;
+    padding-left: 10px;
+    border-radius: 2px;
+    font-size: inherit;
+    transition: all 0.2s;
+    color: #092467;
+}
+
+.post__ad__right textarea {
+    border: 1px solid #092467;
+    margin-top: 5px;
+    margin-bottom: 13px;
+    padding-left: 10px;
+    border-radius: 2px;
+    font-size: inherit;
+    transition: all 0.2s;
+    color: #092467;
+}
+
+.post__ad__left select, .post__ad__right select {
+    width: 100%;
+}
+
+#upload-image {
+    display: none;
+}
+
+#upload-image-btn {
+    width: 97%;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#submit-btn {
+    width: 97%;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 12px;
+    background: #092467;
+    color: white;
+}
+
+#image-preview {
+    height: 200px;
+    width: 99%;
+    border: 1px dotted #092467;
+    /* background: red; */
+}
+
+@media only screen and (max-width: 1200px) {
+    #post__ad .card__wrapper {
+        width: 65%;
+    }
+}
+
+@media only screen and (max-width: 920px) {
+    #post__ad .main__wrapper {
+        width: 60%;
+    }
+    #post__ad .card__wrapper {
+        width: 100%;
+        flex-direction: column;
+        height: inherit;
+        align-items: center;
+    }
+    #post__ad {
+        height: 1025px;
+    }
+    #post__ad .post__ad__left, #post__ad .post__ad__right {
+        width: 80%;
+        padding: 30px;
+    }
+    .post__ad__right textarea {
+        width: 95%;
+    }
+    .uploader img {
+        width: 40%;
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #post__ad .main__wrapper {
+        width: 90%;
+    }
+}
