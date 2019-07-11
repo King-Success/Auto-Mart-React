@@ -1,6 +1,6 @@
 import React from "react";
-import "./DisplayCar.css";
 import PropTypes from "prop-types";
+import "./DisplayCar.css";
 
 function DisplayCar(car) {
   return (
