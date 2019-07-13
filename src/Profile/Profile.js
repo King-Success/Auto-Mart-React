@@ -1,59 +1,78 @@
-import React from "react";
+import React, { Fragment } from "react";
+import { Route } from "react-router-dom";
+import PropTypes from "prop-types";
 import CarDetails from "./CarDetails/CarDetails";
+import Modal from "./Modal/Modal";
 import "./Profile.css";
 
-function Profile() {
+function Profile({ history, match }) {
+  const goBack = () => {
+    history.goBack();
+  };
+
   return (
-    <header id="" class="container">
-      <div class="profile">
-        <div class="aside">
-          <div class="avater__card">
-            <div class="avater" id="avater">
-              <img src="" alt="" />
+    <Fragment>
+      <div id="" className="container">
+        <div className="profile">
+          <div className="aside">
+            <div className="avater__card">
+              <div className="avater" id="avater">
+                <img src="" alt="" />
+              </div>
+              <div className="name">
+                <h2>User Name</h2>
+              </div>
             </div>
-            <div class="name">
-              <h2>User Name</h2>
+            <div className="btns">
+              <a
+                href="post-ad.html"
+                style={{
+                  cursor: "pointer",
+                  width: "50%",
+                  color: "white",
+                  background: "#092467",
+                  borderRadius: "5px"
+                }}
+                className="btn smooth"
+              >
+                create new Ad
+              </a>{" "}
+              <br />
+              <a
+                href="unsold-cars.html"
+                style={{
+                  cursor: "pointer",
+                  width: "50%",
+                  color: "white",
+                  background: "#092467",
+                  borderRadius: "5px"
+                }}
+                className="btn smooth"
+              >
+                buy car
+              </a>
             </div>
           </div>
-          <div class="btns">
-            <a
-              href="post-ad.html"
-              style={{
-                cursor: "pointer",
-                width: "50%",
-                color: "white",
-                background: "#092467",
-                borderRadius: "5px"
-              }}
-              class="btn smooth"
-            >
-              create new Ad
-            </a>{" "}
-            <br />
-            <a
-              href="unsold-cars.html"
-              style={{
-                cursor: "pointer",
-                width: "50%",
-                color: "white",
-                background: "#092467",
-                borderRadius: "5px"
-              }}
-              class="btn smooth"
-            >
-              buy car
-            </a>
+          <div className="main" id="cars-grid">
+            <div className="alert smooth" style={{ textAlign: "center" }}>
+              Loading...
+            </div>
+            <CarDetails data={{}} match={match} />
           </div>
-        </div>
-        <div class="main" id="cars-grid">
-          <div class="alert smooth" style={{ textAlign: "center" }}>
-            Loading...
-          </div>
-          <CarDetails />
         </div>
       </div>
-    </header>
+      <Route
+        exact
+        path={`${match.path}/edit`}
+        render={props => (
+          <Modal onCancel={goBack} {...props} />
+        )}
+      />
+    </Fragment>
   );
 }
 
+Profile.propTypes = {
+  match: PropTypes.object.isRequired
+};
 export default Profile;
