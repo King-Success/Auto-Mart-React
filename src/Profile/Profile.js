@@ -24,37 +24,17 @@ function Profile({ history, match }) {
               </div>
             </div>
             <div className="btns">
-              <a
-                href="post-ad.html"
-                style={{
-                  cursor: "pointer",
-                  width: "50%",
-                  color: "white",
-                  background: "#092467",
-                  borderRadius: "5px"
-                }}
-                className="btn smooth"
-              >
+              <a href="post-ad.html" className="btn btn-blue smooth">
                 create new Ad
               </a>{" "}
               <br />
-              <a
-                href="unsold-cars.html"
-                style={{
-                  cursor: "pointer",
-                  width: "50%",
-                  color: "white",
-                  background: "#092467",
-                  borderRadius: "5px"
-                }}
-                className="btn smooth"
-              >
+              <a href="unsold-cars.html" className="btn btn-blue smooth">
                 buy car
               </a>
             </div>
           </div>
           <div className="main" id="cars-grid">
-            <div className="alert smooth" style={{ textAlign: "center" }}>
+            <div className="alert smooth centered">
               Loading...
             </div>
             <CarDetails data={{}} match={match} />
@@ -64,9 +44,7 @@ function Profile({ history, match }) {
       <Route
         exact
         path={`${match.path}/edit`}
-        render={props => (
-          <Modal onCancel={goBack} {...props} />
-        )}
+        render={props => <Modal onCancel={goBack} {...props} />}
       />
     </Fragment>
   );

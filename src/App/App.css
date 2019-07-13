@@ -50,6 +50,18 @@ body {
   margin: 3px;
 }
 
+.btn-blue {
+  cursor: pointer;
+  width: 50%;
+  color: white;
+  background: #092467;
+  border-radius: 5px;
+}
+
+.centered {
+  text-align: center;
+}
+
 .opacity {
   opacity: 0.8;
 }
