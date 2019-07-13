@@ -34,9 +34,7 @@ function Profile({ history, match }) {
             </div>
           </div>
           <div className="main" id="cars-grid">
-            <div className="alert smooth centered">
-              Loading...
-            </div>
+            <div className="alert smooth centered">Loading...</div>
             <CarDetails data={{}} match={match} />
           </div>
         </div>
@@ -51,6 +49,7 @@ function Profile({ history, match }) {
 }
 
 Profile.propTypes = {
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
 };
 export default Profile;
