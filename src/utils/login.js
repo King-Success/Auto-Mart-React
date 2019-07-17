@@ -1,5 +1,6 @@
 import { setToken } from "../utils/api";
-import { toast } from "react-toastify";
+import notify from "../utils/notify";
+
 const setAuthUser = (token, user) => {
   const authUser = JSON.stringify(user);
   localStorage.setItem("authUser", authUser);
@@ -20,17 +21,17 @@ const handleData = (payload, setLoading, history) => {
     setAuthUser(token, user);
     setToken(token);
     setLoading(false);
-    toast("Login successful");
+    notify("Login successful", "success");
     history.push("/user/profile");
   } else if (payload.status === 400) {
     setLoading(false);
-    toast("Validation error: all fields are required");
+    notify("Validation error: all fields are required");
   } else if (payload.status === 401) {
     setLoading(false);
-    toast("Wrong username or password");
+    notify("Wrong username or password");
   } else {
     setLoading(false);
-    toast("Oops, something happend, try again");
+    notify("Oops, something happend, try again");
   }
 };
 
