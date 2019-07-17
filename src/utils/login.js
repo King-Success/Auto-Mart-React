@@ -14,7 +14,6 @@ const loadAuthUser = () => {
 
 const handleData = (payload, setLoading, history) => {
   const { data } = payload;
-  console.log(data);
   if (payload.status === 200) {
     const { data: user } = data;
     const { token } = user;
@@ -25,7 +24,7 @@ const handleData = (payload, setLoading, history) => {
     history.push("/user/profile");
   } else if (payload.status === 400) {
     setLoading(false);
-    notify("Validation error: all fields are required");
+    notify("All fields are required");
   } else if (payload.status === 401) {
     setLoading(false);
     notify("Wrong username or password");
