@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 
-function Nav() {
+function Nav({ user, logout }) {
   return (
     <nav className="front-navbar container f-15 w-100">
       <span className="front-navbar-toggle" id="navbar__toggle__btn">
@@ -13,14 +13,26 @@ function Nav() {
       </Link>
       <ul className="front-main-nav" id="main__nav__menu">
         <li>
-          <Link to="/auth/login" className="nav-link">
-            Login
-          </Link>
+          {user && user.first_name ? (
+            <Link to="/user/profile" className="nav-link">
+              {user.first_name} {user.last_name}
+            </Link>
+          ) : (
+            <Link to="/auth/login" className="nav-link">
+              Login
+            </Link>
+          )}
         </li>
         <li>
-          <Link to="/auth/signup" className="nav-link">
-            Signup
-          </Link>
+          {user && user.first_name ? (
+            <Link to="/" onClick={logout} className="nav-link">
+              Logout
+            </Link>
+          ) : (
+            <Link to="/auth/signup" className="nav-link">
+              Signup
+            </Link>
+          )}
         </li>
       </ul>
     </nav>

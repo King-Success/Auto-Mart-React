@@ -1,25 +1,10 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify";
-import Spinner from "../views/Spinner/Spinner";
+// import Spinner from "../views/Spinner/Spinner";
 import "./Login.css";
-import { handleData } from "../utils/login";
-import Client from "../utils/api";
 
-function Login({ history }) {
+function Login({ login }) {
   const [form, setFormValues] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
-
-  const loginUser = async () => {
-    setLoading(true);
-    try {
-      const { email, password } = form;
-      const data = await Client.post("/auth/signin", { email, password });
-      handleData(data, setLoading, history);
-    } catch (err) {
-      setLoading(false);
-      toast("Oops, something happend, try again");
-    }
-  };
+  // const [loading, setLoading] = useState(false);
 
   const updateState = e => {
     setFormValues({
@@ -38,7 +23,7 @@ function Login({ history }) {
           Log in to your account
         </p>
         <div className="alert smooth">
-          <Spinner loading={loading} color={"#ffffff"} />
+          {/* <Spinner loading={loading} color={"#ffffff"} /> */}
           <p id="error" />
           <p id="success" />
         </div>
@@ -58,7 +43,7 @@ function Login({ history }) {
           value={form.password}
           onChange={updateState}
         />
-        <button onClick={loginUser} className="f-20" id="login-button">
+        <button onClick={() => login(form)} className="f-20" id="login-button">
           Log In
         </button>
       </div>

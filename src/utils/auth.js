@@ -1,23 +1,33 @@
-import { setToken } from "../utils/api";
-import notify from "../utils/notify";
+import { setToken, unsetToken } from "./api";
+import notify from "./notify";
 
-const setAuthUser = (token, user) => {
+const setAuthUser = (setUser, token, user) => {
   const authUser = JSON.stringify(user);
   localStorage.setItem("authUser", authUser);
   localStorage.setItem("authToken", token);
+  setUser(user);
 };
 
 const loadAuthUser = () => {
   const authUser = localStorage.getItem("authUser");
-  return authUser;
+  return JSON.parse(authUser);
 };
 
-const handleData = (payload, setLoading, history) => {
+const unsetAuthUser = (unsetUser, setLoading) => {
+  localStorage.removeItem("authUser");
+  localStorage.removeItem("authToken");
+  unsetToken();
+  unsetUser({});
+  setLoading(false);
+  notify("Logout successful", "success");
+};
+
+const handleData = (payload, setLoading, setUser, history) => {
   const { data } = payload;
   if (payload.status === 200) {
     const { data: user } = data;
     const { token } = user;
-    setAuthUser(token, user);
+    setAuthUser(setUser, token, user);
     setToken(token);
     setLoading(false);
     notify("Login successful", "success");
@@ -34,4 +44,4 @@ const handleData = (payload, setLoading, history) => {
   }
 };
 
-export { setAuthUser, loadAuthUser, handleData };
+export { setAuthUser, unsetAuthUser, loadAuthUser, handleData };
