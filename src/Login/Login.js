@@ -1,20 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./Login.css";
 
 function Login() {
+  const [form, setFormValues] = useState({ email: "", password: "" });
+
+  const loginUser = async () => {
+    const { email, password } = form;
+    const response = await axios.post(
+      "https://andela-auto-mart.herokuapp.com/api/v1/auth/signin",
+      {
+        email,
+        password
+      }
+    );
+    if (response.status === 200) {
+      const { data: user } = response.data;
+      const { token } = user;
+      console.log({ token, user });
+    }
+  };
+
+  const updateState = e => {
+    setFormValues({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <div id="login" className="container d-flex flex-col flex-center-vertical">
       <div className="login__card d-flex flex-col flex-center-vertical">
-        <p className="f-25 p-25 smooth" style={{ marginBottom: "5px", marginTop: '45px' }}>
+        <p
+          className="f-25 p-25 smooth"
+          style={{ marginBottom: "5px", marginTop: "45px" }}
+        >
           Log in to your account
         </p>
         <div className="alert smooth">
           <p id="error" />
           <p id="success" />
         </div>
-        <input id="email" type="text" placeholder="Email address" />
-        <input id="password" type="password" placeholder="Password" />
-        <button className="f-20" id="login-button">
+        <input
+          name="email"
+          id="email"
+          type="text"
+          placeholder="Email address"
+          value={form.email}
+          onChange={updateState}
+        />
+        <input
+          name="password"
+          id="password"
+          type="password"
+          placeholder="Password"
+          value={form.password}
+          onChange={updateState}
+        />
+        <button onClick={loginUser} className="f-20" id="login-button">
           Log In
         </button>
       </div>

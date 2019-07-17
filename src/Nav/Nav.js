@@ -8,9 +8,9 @@ function Nav() {
       <span className="front-navbar-toggle" id="navbar__toggle__btn">
         &#9776;
       </span>
-      <a href="index.html" className="logo">
+      <Link to="/" className="logo">
         Auto Mart
-      </a>
+      </Link>
       <ul className="front-main-nav" id="main__nav__menu">
         <li>
           <Link to="/auth/login" className="nav-link">
