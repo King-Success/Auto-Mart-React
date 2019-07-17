@@ -34,7 +34,7 @@ function Profile({ history, match }) {
             </div>
           </div>
           <div className="main" id="cars-grid">
-            <div className="alert smooth centered">Loading...</div>
+            <div className="alert smooth centered"></div>
             <CarDetails data={{}} match={match} />
           </div>
         </div>

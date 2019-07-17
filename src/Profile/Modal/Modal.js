@@ -3,7 +3,7 @@ import "./Modal.css";
 
 function Modal({ onCancel, ...rest }) {
   return (
-    <div className="modal show-modal">
+    <div className="fade show-fade">
       <div className="modal-content">
         <span className="close-button" onClick={onCancel}>
           &times;

@@ -11,6 +11,7 @@ import Signup from "../Signup/Signup";
 import AllCars from "../AllCars/AllCars";
 import PostCar from "../PostCar/PostCar";
 import Profile from "../Profile/Profile";
+import Spinner from "../views/Spinner/Spinner";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import "./Util.css";
@@ -44,6 +45,7 @@ function App({ history }) {
     <div className="home__wrapper">
       <Navigation user={user} logout={logout} />
       <ToastContainer />
+      <Spinner loading={loading} />
       <Route exact path="/" component={Landing} />
       <Route path="/auth/login" render={() => <Login login={login} />} />
       <Route path="/auth/signup" component={Signup} />

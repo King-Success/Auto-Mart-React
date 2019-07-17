@@ -78,3 +78,17 @@ body {
   height: 30px;
   margin-bottom: 17px;
 }
+
+/* Toastity message display start */
+
+.Toastify__toast {
+  text-align: center;
+}
+
+/* Spinner start */
+
+.sweet-loading {
+  position: absolute;
+  top: 10%;
+  left: 48%;
+}
