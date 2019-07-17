@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Signup.css";
 
-function Signup() {
+function Signup({ signup }) {
+  const [form, setFormValues] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    phone: "",
+    address: "",
+    password: "",
+    confirmPassword: ""
+  });
+
+  const updateState = e => {
+    e.persist();
+    setFormValues({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <div id="signup" className="container d-flex flex-col flex-center-vertical">
       <div className="main__wrapper">
@@ -51,8 +69,8 @@ function Signup() {
             <label htmlFor="firstname">
               firstname <em>*</em>
               <input
-                className=""
-                name="firstname"
+                onChange={updateState}
+                name="first_name"
                 id="firstname"
                 type="text"
                 placeholder="Firstname"
@@ -61,8 +79,8 @@ function Signup() {
             <label htmlFor="lastname">
               lastname <em>*</em>
               <input
-                className=""
-                name="lastname"
+                onChange={updateState}
+                name="last_name"
                 id="lastname"
                 type="text"
                 placeholder="Lastname"
@@ -71,7 +89,7 @@ function Signup() {
             <label htmlFor="email">
               email <em>*</em>
               <input
-                className=""
+                onChange={updateState}
                 name="email"
                 id="email"
                 type="text"
@@ -81,7 +99,7 @@ function Signup() {
             <label htmlFor="state">
               phone <em>*</em>
               <input
-                className=""
+                onChange={updateState}
                 name="phone"
                 id="phone"
                 type="text"
@@ -91,7 +109,7 @@ function Signup() {
             <label htmlFor="address">
               address <em>*</em>
               <input
-                className=""
+                onChange={updateState}
                 name="address"
                 id="address"
                 type="text"
@@ -101,6 +119,7 @@ function Signup() {
             <label htmlFor="password">
               password <em>*</em>
               <input
+                onChange={updateState}
                 name="password"
                 id="password"
                 type="password"
@@ -110,13 +129,14 @@ function Signup() {
             <label htmlFor="confirm">
               Confirm Password <em>*</em>
               <input
+                onChange={updateState}
                 name="confirm"
                 id="confirmPassword"
                 type="password"
                 placeholder="Confirm password"
               />
             </label>
-            <button className="f-20" id="signup-button">
+            <button onClick={() => signup(form)} className="f-20" id="signup-button">
               Sign up
             </button>
             <p className="acknowledge f-12">

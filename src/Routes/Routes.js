@@ -25,10 +25,15 @@ function Routes({ history }) {
     if (authUser) setUser(authUser);
   }, []);
 
-  const logout = () => {
-    setLoading(true);
-    unsetAuthUser(setUser, setLoading);
-    history.push("/");
+  const signup = async userData => {
+    try {
+      setLoading(true);
+      const data = await Client.post("/auth/signup", userData);
+      handleData(data, setLoading, setUser, history);
+    } catch (err) {
+      setLoading(false);
+      notify("Oops, something happend, try again!");
+    }
   };
 
   const login = async ({ email, password }) => {
@@ -38,9 +43,16 @@ function Routes({ history }) {
       handleData(data, setLoading, setUser, history);
     } catch (err) {
       setLoading(false);
-      notify("Oops, something happend, try again");
+      notify("Oops, something happend, try again!");
     }
   };
+
+  const logout = () => {
+    setLoading(true);
+    unsetAuthUser(setUser, setLoading);
+    history.push("/");
+  };
+
   return (
     <div className="home__wrapper">
       <Navigation user={user} logout={logout} />
@@ -48,7 +60,7 @@ function Routes({ history }) {
       <Spinner loading={loading} />
       <Route exact path="/" component={Landing} />
       <Route path="/auth/login" render={() => <Login login={login} />} />
-      <Route path="/auth/signup" component={Signup} />
+      <Route path="/auth/signup" render={() => <Signup signup={signup} />} />
       <Route path="/cars/all" component={AllCars} />
       <Route path="/cars/new" component={PostCar} />
       <Route path="/user/profile" component={Profile} />

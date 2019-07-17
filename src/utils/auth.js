@@ -23,24 +23,43 @@ const unsetAuthUser = (unsetUser, setLoading) => {
 };
 
 const handleData = (payload, setLoading, setUser, history) => {
+  console.log(payload);
   const { data } = payload;
-  if (payload.status === 200) {
-    const { data: user } = data;
-    const { token } = user;
-    setAuthUser(setUser, token, user);
-    setToken(token);
-    setLoading(false);
-    notify("Login successful", "success");
-    history.push("/user/profile");
-  } else if (payload.status === 400) {
-    setLoading(false);
-    notify("All fields are required");
-  } else if (payload.status === 401) {
-    setLoading(false);
-    notify("Wrong username or password");
-  } else {
-    setLoading(false);
-    notify("Oops, something happend, try again");
+  let user;
+  let token;
+  let error;
+  switch (payload.status) {
+    case 200:
+      user = data.data;
+      token = user.token;
+      setAuthUser(setUser, token, user);
+      setToken(token);
+      setLoading(false);
+      notify("Login successful", "success");
+      history.push("/user/profile");
+      break;
+    case 201:
+      user = data.data;
+      token = user.token;
+      setAuthUser(setUser, token, user);
+      setToken(token);
+      setLoading(false);
+      notify("Account creation successful", "success");
+      history.push("/user/profile");
+      break;
+    case 400:
+      setLoading(false);
+      error = data.error[0];
+      notify(error || "All fields are required");
+      break;
+    case 401:
+      setLoading(false);
+      error = data.error[0];
+      notify(error || "Wrong username or password");
+      break;
+    default:
+      setLoading(false);
+      notify("Oops, something happend, try again");
   }
 };
 
