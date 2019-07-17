@@ -1,23 +1,20 @@
 import React, { useState } from "react";
-import axios from "axios";
 import "./Login.css";
+import { setAuthUser } from "../utils/login";
+import Client, { setToken } from "../utils/api";
 
-function Login() {
+function Login({ history }) {
   const [form, setFormValues] = useState({ email: "", password: "" });
 
   const loginUser = async () => {
     const { email, password } = form;
-    const response = await axios.post(
-      "https://andela-auto-mart.herokuapp.com/api/v1/auth/signin",
-      {
-        email,
-        password
-      }
-    );
-    if (response.status === 200) {
-      const { data: user } = response.data;
+    const data = await Client.post("/auth/signin", { email, password });
+    if (data.status === 200) {
+      const { data: user } = data;
       const { token } = user;
-      console.log({ token, user });
+      setAuthUser(token, user);
+      setToken(token);
+      history.push("/user/profile");
     }
   };
 
