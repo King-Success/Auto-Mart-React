@@ -11,7 +11,6 @@ function Signup({ signup }) {
     password: "",
     confirmPassword: ""
   });
-
   const updateState = e => {
     e.persist();
     setFormValues({
@@ -130,7 +129,7 @@ function Signup({ signup }) {
               Confirm Password <em>*</em>
               <input
                 onChange={updateState}
-                name="confirm"
+                name="confirmPassword"
                 id="confirmPassword"
                 type="password"
                 placeholder="Confirm password"

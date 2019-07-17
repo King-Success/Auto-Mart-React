@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import { Route, withRouter } from "react-router-dom";
-import { loadAuthUser, unsetAuthUser, handleData } from "../utils/auth";
+import {
+  loadAuthUser,
+  unsetAuthUser,
+  handleData,
+  comparePasswords
+} from "../utils/auth";
 import Client from "../utils/api";
 import notify from "../utils/notify";
 import Navigation from "../components/Nav/Nav";
@@ -26,6 +31,11 @@ function Routes({ history }) {
   }, []);
 
   const signup = async userData => {
+    const passwordMatch = comparePasswords(userData);
+    if (!passwordMatch) {
+      notify("Password mismatch, try again!");
+      return;
+    }
     try {
       setLoading(true);
       const data = await Client.post("/auth/signup", userData);

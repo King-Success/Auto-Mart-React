@@ -22,8 +22,11 @@ const unsetAuthUser = (unsetUser, setLoading) => {
   notify("Logout successful", "success");
 };
 
+const comparePasswords = ({ password, confirmPassword }) => {
+  return password === confirmPassword;
+};
+
 const handleData = (payload, setLoading, setUser, history) => {
-  console.log(payload);
   const { data } = payload;
   let user;
   let token;
@@ -57,10 +60,21 @@ const handleData = (payload, setLoading, setUser, history) => {
       error = data.error[0];
       notify(error || "Wrong username or password");
       break;
+    case 409:
+      setLoading(false);
+      error = data.error;
+      notify(error || "Account with provided details already exists");
+      break;
     default:
       setLoading(false);
       notify("Oops, something happend, try again");
   }
 };
 
-export { setAuthUser, unsetAuthUser, loadAuthUser, handleData };
+export {
+  setAuthUser,
+  unsetAuthUser,
+  loadAuthUser,
+  handleData,
+  comparePasswords
+};
