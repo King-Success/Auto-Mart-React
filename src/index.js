@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./index.css";
-import Routes from "./Routes/Routes";
+import Routes from "./routes/Routes";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
