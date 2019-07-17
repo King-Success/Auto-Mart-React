@@ -1,20 +1,23 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import Spinner from "../views/Spinner/Spinner";
 import "./Login.css";
-import { setAuthUser } from "../utils/login";
-import Client, { setToken } from "../utils/api";
+import { handleData } from "../utils/login";
+import Client from "../utils/api";
 
 function Login({ history }) {
   const [form, setFormValues] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   const loginUser = async () => {
-    const { email, password } = form;
-    const data = await Client.post("/auth/signin", { email, password });
-    if (data.status === 200) {
-      const { data: user } = data;
-      const { token } = user;
-      setAuthUser(token, user);
-      setToken(token);
-      history.push("/user/profile");
+    setLoading(true);
+    try {
+      const { email, password } = form;
+      const data = await Client.post("/auth/signin", { email, password });
+      handleData(data, setLoading, history);
+    } catch (err) {
+      setLoading(false);
+      toast("Oops, something happend, try again");
     }
   };
 
@@ -30,11 +33,12 @@ function Login({ history }) {
       <div className="login__card d-flex flex-col flex-center-vertical">
         <p
           className="f-25 p-25 smooth"
-          style={{ marginBottom: "5px", marginTop: "45px" }}
+          style={{ marginBottom: "10px", marginTop: "45px" }}
         >
           Log in to your account
         </p>
         <div className="alert smooth">
+          <Spinner loading={loading} color={"#ffffff"} />
           <p id="error" />
           <p id="success" />
         </div>

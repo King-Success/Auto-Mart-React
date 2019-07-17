@@ -3,11 +3,17 @@ import axios from "axios";
 axios.defaults.baseURL = "https://andela-auto-mart.herokuapp.com/api/v1";
 
 const handleErrors = err => {
-  throw err;
+  if (err.response) {
+    return err.response;
+  } else if (err.request) {
+    throw err.request;
+  } else {
+    throw err.message;
+  }
 };
 
-const responseBody = res => {
-  return res.data;
+const responseBody = payload => {
+  return payload;
 };
 
 const setToken = token => {
