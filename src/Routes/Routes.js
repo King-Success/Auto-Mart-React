@@ -4,19 +4,19 @@ import { Route, withRouter } from "react-router-dom";
 import { loadAuthUser, unsetAuthUser, handleData } from "../utils/auth";
 import Client from "../utils/api";
 import notify from "../utils/notify";
-import Navigation from "../Nav/Nav";
-import Landing from "../Landing/Landing";
-import Login from "../Login/Login";
-import Signup from "../Signup/Signup";
-import AllCars from "../AllCars/AllCars";
-import PostCar from "../PostCar/PostCar";
-import Profile from "../Profile/Profile";
+import Navigation from "../components/Nav/Nav";
+import Landing from "../components/Landing/Landing";
+import Login from "../components/Login/Login";
+import Signup from "../components/Signup/Signup";
+import AllCars from "../components/AllCars/AllCars";
+import PostCar from "../components/PostCar/PostCar";
+import Profile from "../components/Profile/Profile";
 import Spinner from "../views/Spinner/Spinner";
 import "react-toastify/dist/ReactToastify.css";
-import "./App.css";
+import "./Routes.css";
 import "./Util.css";
 
-function App({ history }) {
+function Routes({ history }) {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -56,4 +56,4 @@ function App({ history }) {
   );
 }
 
-export default withRouter(App);
+export default withRouter(Routes);

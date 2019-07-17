@@ -1,7 +1,7 @@
 import React from "react";
 import "./AllCars.css";
 import DisplayCar from "./DisplayCar/DisplayCar";
-import FilterTab from "../views/FilterTab/FilterTab";
+import FilterTab from "../../views/FilterTab/FilterTab";
 
 function AllCars() {
   return (
