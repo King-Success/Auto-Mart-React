@@ -2,7 +2,7 @@ import notify from "./notify";
 import { unsetAuthUser } from "./auth";
 // import { setToken} from './api'
 
-const handleData = (payload, setLoading, history = {}, logout) => {
+const handleData = (payload, setLoading, history = {}) => {
   const { data } = payload;
   switch (payload.status) {
     case 200:
@@ -11,7 +11,7 @@ const handleData = (payload, setLoading, history = {}, logout) => {
     case 401:
       setLoading(false);
       unsetAuthUser();
-      logout("/auth/login");
+      history.push("/auth/login");
       notify("Oops, session expired, kindly login!");
       return false;
     case 404:

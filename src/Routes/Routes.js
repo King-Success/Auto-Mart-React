@@ -27,10 +27,7 @@ function Routes({ history }) {
 
   useEffect(() => {
     const authUser = loadAuthUser();
-    if (authUser) {
-      setUser(authUser);
-      setToken(user.token);
-    }
+    if (authUser) setUser(authUser);
   }, []);
 
   const signup = async userData => {
@@ -78,7 +75,7 @@ function Routes({ history }) {
       <Route path="/cars/new" component={PostCar} />
       <Route
         path="/user/profile"
-        render={props => <Profile logout={logout} {...props} />}
+        render={props => <Profile user={user} {...props} />}
       />
     </div>
   );

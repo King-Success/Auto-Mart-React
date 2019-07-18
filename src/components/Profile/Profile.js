@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import CarDetails from "./CarDetails/CarDetails";
 import Modal from "./Modal/Modal";
@@ -8,7 +8,7 @@ import { handleData } from "../../utils";
 import "./Profile.css";
 import Spinner from "../../views/Spinner/Spinner";
 
-function Profile({ history, match, logout }) {
+function Profile({ history, match, user }) {
   const [adverts, setAdverts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,7 +19,7 @@ function Profile({ history, match, logout }) {
   useEffect(() => {
     const fetchAds = async () => {
       const data = await Client.get("/car");
-      const ads = handleData(data, setLoading, history, logout);
+      const ads = handleData(data, setLoading, history);
       if (ads) setAdverts(ads);
     };
     fetchAds();
@@ -37,17 +37,21 @@ function Profile({ history, match, logout }) {
                 <img src="" alt="" />
               </div>
               <div className="name">
-                <h2>User Name</h2>
+                <h2>
+                  {user.first_name
+                    ? `${user.first_name} ${user.last_name}`
+                    : "Hello User"}
+                </h2>
               </div>
             </div>
             <div className="btns">
-              <a href="post-ad.html" className="btn btn-blue smooth">
+              <Link to={"/cars/all"} className="btn btn-blue smooth">
                 create new Ad
-              </a>{" "}
+              </Link>{" "}
               <br />
-              <a href="unsold-cars.html" className="btn btn-blue smooth">
+              <Link to={"/cars/new"} className="btn btn-blue smooth">
                 buy car
-              </a>
+              </Link>
             </div>
           </div>
           <div className="main" id="cars-grid">
