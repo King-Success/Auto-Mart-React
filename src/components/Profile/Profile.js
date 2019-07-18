@@ -22,10 +22,9 @@ function Profile({ history, match, user }) {
       const ads = handleData(data, setLoading, history);
       if (ads) setAdverts(ads);
     };
-    fetchAds();
+    fetchAds(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(adverts);
   return (
     <Fragment>
       <Spinner loading={loading} />

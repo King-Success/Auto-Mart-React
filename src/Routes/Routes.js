@@ -7,7 +7,7 @@ import {
   handleData,
   comparePasswords
 } from "../utils/auth";
-import Client, { setToken } from "../utils/api";
+import Client from "../utils/api";
 import notify from "../utils/notify";
 import Navigation from "../components/Nav/Nav";
 import Landing from "../components/Landing/Landing";
