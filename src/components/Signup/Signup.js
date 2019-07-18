@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./Signup.css";
 
 function Signup({ signup }) {
@@ -135,7 +136,11 @@ function Signup({ signup }) {
                 placeholder="Confirm password"
               />
             </label>
-            <button onClick={() => signup(form)} className="f-20" id="signup-button">
+            <button
+              onClick={() => signup(form)}
+              className="f-20"
+              id="signup-button"
+            >
               Sign up
             </button>
             <p className="acknowledge f-12">
@@ -149,5 +154,9 @@ function Signup({ signup }) {
     </div>
   );
 }
+
+Signup.propTypes = {
+  signup: PropTypes.func.isRequired
+};
 
 export default Signup;

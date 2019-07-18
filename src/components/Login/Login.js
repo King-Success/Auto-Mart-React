@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-// import Spinner from "../views/Spinner/Spinner";
+import PropTypes from "prop-types";
 import "./Login.css";
 
 function Login({ login }) {
   const [form, setFormValues] = useState({ email: "", password: "" });
-  // const [loading, setLoading] = useState(false);
-
   const updateState = e => {
     setFormValues({
       ...form,
@@ -23,7 +21,6 @@ function Login({ login }) {
           Log in to your account
         </p>
         <div className="alert smooth">
-          {/* <Spinner loading={loading} color={"#ffffff"} /> */}
           <p id="error" />
           <p id="success" />
         </div>
@@ -58,5 +55,9 @@ function Login({ login }) {
     </div>
   );
 }
+
+Login.propTypes = {
+  login: PropTypes.func.isRequired
+};
 
 export default Login;

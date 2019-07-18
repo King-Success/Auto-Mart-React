@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Modal.css";
 
 function Modal({ onCancel, ...rest }) {
@@ -24,5 +25,9 @@ function Modal({ onCancel, ...rest }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  onCancel: PropTypes.func.isRequired
+};
 
 export default Modal;

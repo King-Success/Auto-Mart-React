@@ -84,7 +84,8 @@ function Profile({ history, match, user }) {
 
 Profile.propTypes = {
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 export default Profile;
