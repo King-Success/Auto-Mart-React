@@ -42,7 +42,7 @@ function Routes({ history }) {
       handleData(data, setLoading, setUser, history);
     } catch (err) {
       setLoading(false);
-      notify("Oops, something happend, try again!");
+      notify("Oops, check your connection and try again!");
     }
   };
 
@@ -53,7 +53,7 @@ function Routes({ history }) {
       handleData(data, setLoading, setUser, history);
     } catch (err) {
       setLoading(false);
-      notify("Oops, something happend, try again!");
+      notify("Oops, check your connection and try again!");
     }
   };
 

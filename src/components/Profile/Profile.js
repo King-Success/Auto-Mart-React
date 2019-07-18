@@ -5,6 +5,7 @@ import CarDetails from "./CarDetails/CarDetails";
 import Modal from "./Modal/Modal";
 import Client from "../../utils/api";
 import { handleData } from "../../utils";
+import notify from "../../utils/notify";
 import "./Profile.css";
 import Spinner from "../../views/Spinner/Spinner";
 
@@ -18,9 +19,14 @@ function Profile({ history, match, user }) {
 
   useEffect(() => {
     const fetchAds = async () => {
-      const data = await Client.get("/car");
-      const ads = handleData(data, setLoading, history);
-      if (ads) setAdverts(ads);
+      try {
+        const data = await Client.get("/car");
+        const ads = handleData(data, setLoading, history);
+        if (ads) setAdverts(ads);
+      } catch (err) {
+        setLoading(false);
+        notify("Oops, check your connection and try again!");
+      }
     };
     fetchAds(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
