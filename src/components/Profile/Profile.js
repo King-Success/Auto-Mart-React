@@ -6,10 +6,11 @@ import Modal from "./Modal/Modal";
 import Client from "../../utils/api";
 import { handleData } from "../../utils";
 import "./Profile.css";
+import Spinner from "../../views/Spinner/Spinner";
 
 function Profile({ history, match, logout }) {
   const [adverts, setAdverts] = useState([]);
-  const [Loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const closeModal = () => {
     history.goBack();
@@ -21,12 +22,13 @@ function Profile({ history, match, logout }) {
       const ads = handleData(data, setLoading, history, logout);
       if (ads) setAdverts(ads);
     };
-    setLoading(true);
     fetchAds();
   }, []);
 
+  console.log(adverts);
   return (
     <Fragment>
+      <Spinner loading={loading} />
       <div id="" className="container">
         <div className="profile">
           <div className="aside">
@@ -50,7 +52,15 @@ function Profile({ history, match, logout }) {
           </div>
           <div className="main" id="cars-grid">
             <div className="alert smooth centered" />
-            <CarDetails data={{}} match={match} />
+            {adverts.length ? (
+              adverts.map(advert => <CarDetails data={advert} match={match} />)
+            ) : loading ? (
+              ""
+            ) : (
+              <h2 style={{ textAlign: "center" }}>
+                404, you are yet to post an advert
+              </h2>
+            )}
           </div>
         </div>
       </div>
