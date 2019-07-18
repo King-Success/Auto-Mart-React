@@ -13,13 +13,13 @@ const loadAuthUser = () => {
   return JSON.parse(authUser);
 };
 
-const unsetAuthUser = (unsetUser, setLoading) => {
+const unsetAuthUser = (unsetUser = null, setLoading = null) => {
   localStorage.removeItem("authUser");
   localStorage.removeItem("authToken");
   unsetToken();
-  unsetUser({});
-  setLoading(false);
-  notify("Logout successful", "success");
+  if (unsetUser) unsetUser({});
+  if (setLoading) setLoading(false);
+  if (unsetUser) notify("Logout successful", "success");
 };
 
 const comparePasswords = ({ password, confirmPassword }) => {

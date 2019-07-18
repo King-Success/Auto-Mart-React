@@ -1,14 +1,29 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import CarDetails from "./CarDetails/CarDetails";
 import Modal from "./Modal/Modal";
+import Client from "../../utils/api";
+import { handleData } from "../../utils";
 import "./Profile.css";
 
-function Profile({ history, match }) {
-  const goBack = () => {
+function Profile({ history, match, logout }) {
+  const [adverts, setAdverts] = useState([]);
+  const [Loading, setLoading] = useState(false);
+
+  const closeModal = () => {
     history.goBack();
   };
+
+  useEffect(() => {
+    const fetchAds = async () => {
+      const data = await Client.get("/car");
+      const ads = handleData(data, setLoading, history, logout);
+      if (ads) setAdverts(ads);
+    };
+    setLoading(true);
+    fetchAds();
+  }, []);
 
   return (
     <Fragment>
@@ -34,7 +49,7 @@ function Profile({ history, match }) {
             </div>
           </div>
           <div className="main" id="cars-grid">
-            <div className="alert smooth centered"></div>
+            <div className="alert smooth centered" />
             <CarDetails data={{}} match={match} />
           </div>
         </div>
@@ -42,7 +57,7 @@ function Profile({ history, match }) {
       <Route
         exact
         path={`${match.path}/edit`}
-        render={props => <Modal onCancel={goBack} {...props} />}
+        render={props => <Modal onCancel={closeModal} {...props} />}
       />
     </Fragment>
   );

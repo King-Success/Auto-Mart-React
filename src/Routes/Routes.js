@@ -7,7 +7,7 @@ import {
   handleData,
   comparePasswords
 } from "../utils/auth";
-import Client from "../utils/api";
+import Client, { setToken } from "../utils/api";
 import notify from "../utils/notify";
 import Navigation from "../components/Nav/Nav";
 import Landing from "../components/Landing/Landing";
@@ -27,7 +27,10 @@ function Routes({ history }) {
 
   useEffect(() => {
     const authUser = loadAuthUser();
-    if (authUser) setUser(authUser);
+    if (authUser) {
+      setUser(authUser);
+      setToken(user.token);
+    }
   }, []);
 
   const signup = async userData => {
@@ -57,10 +60,10 @@ function Routes({ history }) {
     }
   };
 
-  const logout = () => {
+  const logout = url => {
     setLoading(true);
     unsetAuthUser(setUser, setLoading);
-    history.push("/");
+    history.push(url || "/");
   };
 
   return (
@@ -73,7 +76,10 @@ function Routes({ history }) {
       <Route path="/auth/signup" render={() => <Signup signup={signup} />} />
       <Route path="/cars/all" component={AllCars} />
       <Route path="/cars/new" component={PostCar} />
-      <Route path="/user/profile" component={Profile} />
+      <Route
+        path="/user/profile"
+        render={props => <Profile logout={logout} {...props} />}
+      />
     </div>
   );
 }

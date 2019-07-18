@@ -17,11 +17,11 @@ const responseBody = payload => {
 };
 
 const setToken = token => {
-  axios.defaults.headers.common["Authorization"] = token;
+  axios.defaults.headers.common["token"] = token;
 };
 
 const unsetToken = () => {
-  axios.defaults.headers.common["Authorization"] = "";
+  axios.defaults.headers.common["token"] = "";
 };
 const client = {
   get: url =>
