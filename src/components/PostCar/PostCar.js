@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import ImageUpload from '../ImageUpload/ImageUploadx'
 import "./PostCar.css";
 import ImageUpload from "../ImageUpload/ImageUpload";
+import Spinner from "../../views/Spinner/Spinner";
 
 function PostCar() {
   const [form, setFormValues] = useState({
@@ -9,9 +9,11 @@ function PostCar() {
     price: "",
     manufacturer: "",
     model: "",
-    type: "",
-    image_: ""
+    type: ""
   });
+  const [image_url, setImageUrl] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const updateState = e => {
     e.persist();
@@ -20,7 +22,6 @@ function PostCar() {
       [e.target.name]: e.target.value
     });
   };
-
   return (
     <div
       id="post__ad"
@@ -55,9 +56,20 @@ function PostCar() {
               <option value="SUV">suv</option>
             </select>
             <div id="image-preview">
-              <img src="" alt="" id="preview" width="100%" height="100%" />
+              <Spinner loading={uploading} />
+              <img
+                src={image_url}
+                alt=""
+                id="preview"
+                width="100%"
+                height="100%"
+              />
             </div>
-            <ImageUpload callback={() => {}} />
+            <ImageUpload
+              setImageUrl={setImageUrl}
+              uploading={uploading}
+              setUploading={setUploading}
+            />
             {/* <input type="file" name="" id="upload-image" />
             <button className="btn" id="upload-image-btn">
               {" "}

@@ -1,22 +1,21 @@
-import React, { useState, Fragment } from "react";
+import React, {  Fragment } from "react";
 import PropTypes from "prop-types";
 import notify from "../../utils/notify";
 import config from "../../config";
 const { CLOUDINARY_PRESET, CLOUDINARY_URL } = config;
 
-const ImageUpload = ({ callback }) => {
-  const [uploading, setUploading] = useState(false);
+const ImageUpload = ({ uploading, setUploading, setImageUrl }) => {
   let select;
 
   const handleUpload = e => {
-    const file = e.target.files;
+    const file = e.target.files[0];
     const formData = new FormData();
     const types = ["image/png", "image/jpeg", "image/gif"];
     if (types.every(type => file.type !== type)) {
-      notify(`'${file.type}' is not a supported format`);
+      return notify(`'${file.type}' is not a supported format`);
     }
 
-    if (file.size > 150000) {
+    if (file.size > 1500000) {
       return notify(`'${file.name}' is too large, please pick a smaller file`);
     }
 
@@ -38,8 +37,8 @@ const ImageUpload = ({ callback }) => {
       .then(image => {
         const imageUrl = image.secure_url;
         setUploading(false);
-        callback({ imageUrl });
-        notify("Image uploaded");
+        setImageUrl(imageUrl);
+        notify("Image uploaded", "success");
       })
       .catch(err => {
         err.json().then(e => {
@@ -77,7 +76,9 @@ const ImageUpload = ({ callback }) => {
 };
 
 ImageUpload.propTypes = {
-  callback: PropTypes.func.isRequired
+  setImageUrl: PropTypes.func.isRequired,
+  setUploading: PropTypes.func.isRequired,
+  uploading: PropTypes.bool.isRequired
 };
 
 export default ImageUpload;
