@@ -50,11 +50,11 @@ function Profile({ history, match, user }) {
               </div>
             </div>
             <div className="btns">
-              <Link to={"/cars/all"} className="btn btn-blue smooth">
+              <Link to={"/cars/new"} className="btn btn-blue smooth">
                 create new Ad
               </Link>{" "}
               <br />
-              <Link to={"/cars/new"} className="btn btn-blue smooth">
+              <Link to={"/cars/all"} className="btn btn-blue smooth">
                 buy car
               </Link>
             </div>

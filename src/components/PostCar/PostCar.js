@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+// import ImageUpload from '../ImageUpload/ImageUploadx'
 import "./PostCar.css";
+import ImageUpload from "../ImageUpload/ImageUpload";
 
 function PostCar() {
+  const [form, setFormValues] = useState({
+    state: "",
+    price: "",
+    manufacturer: "",
+    model: "",
+    type: "",
+    image_: ""
+  });
+
+  const updateState = e => {
+    e.persist();
+    setFormValues({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
-    <div id="post__ad" class="container d-flex flex-col flex-center-vertical">
-      <div class="main__wrapper">
-        <div class="card__wrapper ">
-          <div class="post__ad__left">
+    <div
+      id="post__ad"
+      className="container d-flex flex-col flex-center-vertical"
+    >
+      <div className="main__wrapper">
+        <div className="card__wrapper ">
+          <div className="post__ad__left">
             <div
-              class="alert smooth"
+              className="alert smooth"
               style={{ marginBottom: 0, textAlign: "center" }}
             >
               <p id="error" />
@@ -35,12 +57,13 @@ function PostCar() {
             <div id="image-preview">
               <img src="" alt="" id="preview" width="100%" height="100%" />
             </div>
-            <input type="file" name="" id="upload-image" />
-            <button class="btn" id="upload-image-btn">
+            <ImageUpload callback={() => {}} />
+            {/* <input type="file" name="" id="upload-image" />
+            <button className="btn" id="upload-image-btn">
               {" "}
-              <i class="fas fa-plus" /> upload image
-            </button>
-            <button class="btn" id="submit-btn">
+              <i className="fas fa-plus" /> upload image
+            </button> */}
+            <button className="btn" id="submit-btn">
               {" "}
               submit{" "}
             </button>
