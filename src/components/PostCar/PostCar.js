@@ -32,7 +32,6 @@ function PostCar() {
       setLoading(true);
       const response = await Client.post("/car", payload);
       handleData(response, setLoading);
-      console.log(response.status);
       if (response.status === 201) {
         setFormValues({
           state: "",
@@ -42,7 +41,6 @@ function PostCar() {
           body_type: ""
         });
         setImageUrl("");
-        console.log(form);
       }
     } catch (err) {
       setLoading(false);
