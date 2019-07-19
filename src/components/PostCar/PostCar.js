@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./PostCar.css";
 import ImageUpload from "../ImageUpload/ImageUpload";
 import Spinner from "../../views/Spinner/Spinner";
+import Client from "../../utils/api";
+import { handleData } from "../../utils";
+import notify from "../../utils/notify";
 
 function PostCar() {
   const [form, setFormValues] = useState({
@@ -9,19 +12,44 @@ function PostCar() {
     price: "",
     manufacturer: "",
     model: "",
-    type: ""
+    body_type: ""
   });
   const [image_url, setImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const updateState = e => {
+  const updateFormState = e => {
     e.persist();
     setFormValues({
       ...form,
       [e.target.name]: e.target.value
     });
   };
+
+  const handleSave = async () => {
+    const payload = { ...form, image_url };
+    try {
+      setLoading(true);
+      const response = await Client.post("/car", payload);
+      handleData(response, setLoading);
+      console.log(response.status);
+      if (response.status === 201) {
+        setFormValues({
+          state: "",
+          price: "",
+          manufacturer: "",
+          model: "",
+          body_type: ""
+        });
+        setImageUrl("");
+        console.log(form);
+      }
+    } catch (err) {
+      setLoading(false);
+      notify("Oops, check your connection and try again!");
+    }
+  };
+
   return (
     <div
       id="post__ad"
@@ -30,30 +58,48 @@ function PostCar() {
       <div className="main__wrapper">
         <div className="card__wrapper ">
           <div className="post__ad__left">
-            <div
-              className="alert smooth"
-              style={{ marginBottom: 0, textAlign: "center" }}
+            <Spinner loading={loading} />
+            <select
+              name="state"
+              id="state"
+              onChange={updateFormState}
+              value={form.state}
             >
-              <p id="error" />
-              <p id="success" />
-            </div>{" "}
-            <select name="" id="state">
               <option value="">state e.g new</option>
-              <option value="New">new</option>
-              <option value="Used">used</option>
+              <option value="new">new</option>
+              <option value="used">used</option>
             </select>
-            <input type="text" id="price" placeholder="price e.g 120000.00" />
             <input
               type="text"
-              id="manufacturer"
+              value={form.price}
+              name="price"
+              placeholder="price e.g 120000"
+              onChange={updateFormState}
+            />
+            <input
+              type="text"
+              value={form.manufacturer}
+              name="manufacturer"
+              onChange={updateFormState}
               placeholder="manufacturer e.g Tesla"
             />
-            <input type="text" id="model" placeholder="model e.g model S" />
-            <select name="" id="type">
+            <input
+              type="text"
+              value={form.model}
+              name="model"
+              placeholder="model e.g model S"
+              onChange={updateFormState}
+            />
+            <select
+              name="body_type"
+              id="type"
+              onChange={updateFormState}
+              value={form.body_type}
+            >
               <option value="">type e.g suv</option>
-              <option value="Car">car</option>
-              <option value="Truck">truck</option>
-              <option value="SUV">suv</option>
+              <option value="car">car</option>
+              <option value="truck">truck</option>
+              <option value="suv">suv</option>
             </select>
             <div id="image-preview">
               <Spinner loading={uploading} />
@@ -70,12 +116,7 @@ function PostCar() {
               uploading={uploading}
               setUploading={setUploading}
             />
-            {/* <input type="file" name="" id="upload-image" />
-            <button className="btn" id="upload-image-btn">
-              {" "}
-              <i className="fas fa-plus" /> upload image
-            </button> */}
-            <button className="btn" id="submit-btn">
+            <button className="btn" id="submit-btn" onClick={handleSave}>
               {" "}
               submit{" "}
             </button>

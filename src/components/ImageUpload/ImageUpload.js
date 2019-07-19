@@ -1,4 +1,4 @@
-import React, {  Fragment } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import notify from "../../utils/notify";
 import config from "../../config";
@@ -9,6 +9,7 @@ const ImageUpload = ({ uploading, setUploading, setImageUrl }) => {
 
   const handleUpload = e => {
     const file = e.target.files[0];
+    if (!file) return;
     const formData = new FormData();
     const types = ["image/png", "image/jpeg", "image/gif"];
     if (types.every(type => file.type !== type)) {
