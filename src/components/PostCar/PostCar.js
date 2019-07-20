@@ -14,7 +14,7 @@ function PostCar() {
     model: "",
     body_type: ""
   });
-  const [image_url, setImageUrl] = useState("");
+  const [main_image_url, setImageUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -27,7 +27,7 @@ function PostCar() {
   };
 
   const handleSave = async () => {
-    const payload = { ...form, image_url };
+    const payload = { ...form, main_image_url };
     try {
       setLoading(true);
       const response = await Client.post("/car", payload);
@@ -102,7 +102,7 @@ function PostCar() {
             <div id="image-preview">
               <Spinner loading={uploading} />
               <img
-                src={image_url}
+                src={main_image_url}
                 alt=""
                 id="preview"
                 width="100%"

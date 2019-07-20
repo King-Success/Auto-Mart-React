@@ -1,6 +1,6 @@
+import moment from "moment";
 import notify from "./notify";
 import { unsetAuthUser } from "./auth";
-// import { setToken} from './api'
 
 const handleData = (payload, setLoading, history = {}) => {
   const { data } = payload;
@@ -32,4 +32,7 @@ const handleData = (payload, setLoading, history = {}) => {
   }
 };
 
-export { handleData };
+const formatDate = (date, showTime = false) =>
+  moment(date).format(`ddd, MMM Do YYYY ${showTime ? "by HH:mm:ss a" : ""}`);
+
+export { handleData, formatDate };

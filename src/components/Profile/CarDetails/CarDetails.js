@@ -1,32 +1,36 @@
 import React from "react";
-import {Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import "./CarDetails.css";
+import { formatDate } from "../../../utils";
 
 function CarDetails({ data, match }) {
   return (
     <div className="grid">
       <div className="grid__image">
-        <img src="" alt="" />
+        <img src={data.main_image_url} alt={data.model} />
       </div>
       <div className="grid__description">
         <div className="text">
-          <h1 className="title">Car Model</h1>
+          <h1 className="title">{data.model}</h1>
           <ul className="f-15">
             <li>
-              <strong>body type</strong>:{" "}
+              <strong>body type</strong>: {data.body_type}
             </li>
             <li>
-              <strong>state</strong>:{" "}
+              <strong>state</strong>: {data.state}
             </li>
             <li>
-              <strong>manufacturer</strong>:{" "}
+              <strong>manufacturer</strong>: {data.manufacturer}
             </li>
             <li>
-              <strong>posted on</strong>:{" "}
+              <strong>posted on</strong>: {formatDate(data.created_on)}
             </li>
             <li>
-              <strong>price</strong>: <em className="" style={{ color: "green" }} />
+              <strong>price</strong>:{" "}
+              <em className="" style={{ color: "green" }}>
+                {data.price}
+              </em>
             </li>
           </ul>
         </div>
