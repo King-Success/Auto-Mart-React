@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { Route, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import CarDetails from "./CarDetails/CarDetails";
+import Pagination from "../../views/Pagination/Pagination";
 import Modal from "./Modal/Modal";
 import Client from "../../utils/api";
 import { handleData } from "../../utils";
@@ -10,11 +11,45 @@ import "./Profile.css";
 import Spinner from "../../views/Spinner/Spinner";
 
 function Profile({ history, match, user }) {
-  const [adverts, setAdverts] = useState([]);
+  const [alladverts, setAllAdverts] = useState([]);
+  const [activeAdverts, setActiveAdverts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [pageNav, setPageNav] = useState({ hasNext: false, hasPrev: false });
+  const [page, setPage] = useState(0);
+  const perPage = 5;
+
+  const paginate = (page, data = []) => {
+    if (!data) return;
+    const startIndex = perPage * page;
+    const endIndex = startIndex + perPage;
+    const hasNext = data[endIndex] ? true : false;
+    const hasPrev = data[startIndex - 1] ? true : false;
+    const adverts = data.slice(startIndex, endIndex);
+    setPageNav({
+      hasNext: hasNext,
+      hasPrev: hasPrev
+    });
+    setActiveAdverts(adverts);
+    return false;
+  };
+
+  const next = () => {
+    const nextPage = page + 1;
+    paginate(nextPage, alladverts);
+    setPage(nextPage);
+    return false;
+  };
+
+  const prev = () => {
+    const prevPage = page - 1;
+    paginate(prevPage, alladverts);
+    setPage(prevPage);
+    return false;
+  };
 
   const closeModal = () => {
     history.goBack();
+    return false;
   };
 
   useEffect(() => {
@@ -22,7 +57,10 @@ function Profile({ history, match, user }) {
       try {
         const data = await Client.get("/car");
         const ads = handleData(data, setLoading, history);
-        if (ads) setAdverts(ads);
+        if (ads) {
+          paginate(page, ads);
+          setAllAdverts(ads);
+        }
       } catch (err) {
         setLoading(false);
         notify("Oops, check your connection and try again!");
@@ -60,9 +98,10 @@ function Profile({ history, match, user }) {
             </div>
           </div>
           <div className="main" id="cars-grid">
-            <div className="alert smooth centered" />
-            {adverts.length ? (
-              adverts.map(advert => <CarDetails data={advert} match={match} />)
+            {activeAdverts.length ? (
+              activeAdverts.map((advert, index) => (
+                <CarDetails data={advert} match={match} key={index} />
+              ))
             ) : loading ? (
               ""
             ) : (
@@ -70,6 +109,13 @@ function Profile({ history, match, user }) {
                 404, you are yet to post an advert
               </h2>
             )}
+            <Pagination
+              display={true}
+              next={next}
+              prev={prev}
+              hasNext={pageNav.hasNext}
+              hasPrev={pageNav.hasPrev}
+            />
           </div>
         </div>
       </div>
